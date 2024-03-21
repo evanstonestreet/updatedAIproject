@@ -31,7 +31,21 @@ namespace custom {
         }
     }
     
+
+    //% block = "foreverBlock"
+    export function foreverBlock(): void {
+        if (training.status){
+            if (training.currentlyRunning && training.moreSessions()){
+                // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
+                serial.writeLine(input.acceleration(Dimension.X) + " ")
+                training.currentSession.push(input.acceleration(Dimension.X))
+            }
+        }
+    }
+
+
     //% block = "trainingMode"
+    // To be dragged into the onStart block
     export function trainingMode(): void {
         training.status = true;
         serial.writeLine("Training mode turned on")
@@ -41,16 +55,12 @@ namespace custom {
     export function trainingButtonA(): void{
         if (training.status && !training.currentlyRunning){
             training.currentlyRunning = true
-            while(training.currentlyRunning && training.moreSessions()){
-                // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
-                serial.writeLine(input.acceleration(Dimension.X) + " ")
-                training.currentSession.push(input.acceleration(Dimension.X))
-            }
         }
     }
 
     //% block = "trainingButtonB"
     export function trainingButtonB(): void {
+        serial.writeLine("Button B is pressed")
         if (training.status && training.currentlyRunning) {
             training.currentlyRunning = false
             training.dataSessions.push(training.currentSession)
