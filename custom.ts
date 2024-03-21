@@ -39,12 +39,12 @@ namespace custom {
             if (training.moreSessions()){
                 // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
                 serial.writeLine(input.acceleration(Dimension.X) + " ")
+                datalogger.log(datalogger.createCV(training.sessionColumns[training.sessionNum], input.acceleration(Dimension.X)))
                 training.currentSession.push(input.acceleration(Dimension.X))
             }
 
         }
     }
-
 
     //% block = "trainingMode"
     // To be dragged into the onStart block
@@ -52,6 +52,10 @@ namespace custom {
         training.status = true;
         serial.writeLine("Training mode turned on")
     }
+
+//____________________________________________CUSTOM BLOCKS FOR TRAINING TO BE PUT INSIDE BUTTON A AND BUTTON B RESPECTIVELY_____________________________________
+
+    
 
     //% block = "trainingButtonA"
     export function trainingButtonA(): void{
@@ -65,16 +69,20 @@ namespace custom {
         serial.writeLine("Button B is pressed")
         if (training.status && training.currentlyRunning) {
             training.currentlyRunning = false
+            datalogger.includeTimestamp(FlashLogTimeStampFormat.None)
             training.dataSessions.push(training.currentSession)
-            datalogger.log(datalogger.createCV(training.sessionColumns[training.sessionNum], training.currentSession))
             training.currentSession = []
             training.sessionNum += 1
-            if (!training.moreSessions()){
+            if (!training.moreSessions()) {
                 serial.writeLine("You have completed your training with " + training.numOfTrainingSessions + " sessions")
                 console.log(training.dataSessions)
             }
         }
     }
+
+//________________________________________________________________________________________________________________________________________________________________
+
+    
     
     //% block="Turn motor by %degrees degrees (Train for %numSessions sessions)"
     export function turnMotor (degrees: number, numSessions: number) {
