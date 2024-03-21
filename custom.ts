@@ -34,12 +34,15 @@ namespace custom {
 
     //% block = "foreverBlock"
     export function foreverBlock(): void {
-        if (training.status){
-            if (training.currentlyRunning && training.moreSessions()){
+        if (training.status && training.currentlyRunning){
+            if (training.moreSessions()){
                 // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
                 serial.writeLine(input.acceleration(Dimension.X) + " ")
                 training.currentSession.push(input.acceleration(Dimension.X))
+            } else{
+                serial.writeLine("You have completed your training with " + training.numOfTrainingSessions + "sessions")
             }
+
         }
     }
 

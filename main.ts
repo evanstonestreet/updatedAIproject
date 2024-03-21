@@ -7,5 +7,5 @@ input.onButtonPressed(Button.B, function () {
 custom.trainingMode()
 custom.turnMotor(50, 5)
 basic.forever(function () {
-	
+    custom.foreverBlock()
 })
