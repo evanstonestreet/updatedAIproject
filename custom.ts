@@ -26,6 +26,7 @@ namespace custom {
         dataSessions: [] as number[][], // 2D array that stores each 1D array of data associated with each training session
         currentSession: [] as number[], // 1D array that temporarily stores data for each session before pushing to dataSessions and clearing itself
         activity: "", // mo for motor and mu for music
+        sessionColumns: ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9", "Session 10"],
         moreSessions: function(){ // returns true if we still have more sessions to train
             return training.sessionNum < training.numOfTrainingSessions
         }
@@ -65,6 +66,7 @@ namespace custom {
         if (training.status && training.currentlyRunning) {
             training.currentlyRunning = false
             training.dataSessions.push(training.currentSession)
+            datalogger.log(datalogger.createCV(training.sessionColumns[training.sessionNum], training.currentSession))
             training.currentSession = []
             training.sessionNum += 1
             if (!training.moreSessions()){
