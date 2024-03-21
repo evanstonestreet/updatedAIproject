@@ -1,9 +1,9 @@
 input.onButtonPressed(Button.A, function () {
     custom.trainingButtonA()
 })
+// datalogger.includeTimestamp(FlashLogTimeStampFormat.None)
 input.onButtonPressed(Button.B, function () {
     custom.trainingButtonB()
-    //datalogger.includeTimestamp(FlashLogTimeStampFormat.None)
 })
 custom.trainingMode()
 custom.turnMotor(50, 2)

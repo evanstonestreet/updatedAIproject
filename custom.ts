@@ -33,6 +33,7 @@ namespace custom {
     }
     
 
+    // Block to put inside the forever block. Will add code for the testing portion
     //% block = "foreverBlock"
     export function foreverBlock(): void {
         if (training.status && training.currentlyRunning){ // makes sure we are in training mode and we are currently running a session
@@ -85,7 +86,7 @@ namespace custom {
 //________________________________________________________________________________________________________________________________________________________________
 
     
-    
+// Motor turning activity block. To be dragged into On start    
     //% block="Turn motor by %degrees degrees (Train for %numSessions sessions)"
     export function turnMotor (degrees: number, numSessions: number) {
         //serial.writeLine("Turning motor by " + degrees + " degrees")
