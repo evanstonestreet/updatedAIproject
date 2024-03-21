@@ -26,7 +26,7 @@ namespace custom {
         dataSessions: [] as number[][], // 2D array that stores each 1D array of data associated with each training session
         currentSession: [] as number[], // 1D array that temporarily stores data for each session before pushing to dataSessions and clearing itself
         activity: "", // mo for motor and mu for music
-        sessionColumns: ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9", "Session 10"],
+        sessionColumns: [] as string[],
         moreSessions: function(){ // returns true if we still have more sessions to train
             return training.sessionNum < training.numOfTrainingSessions
         }
@@ -38,7 +38,7 @@ namespace custom {
         if (training.status && training.currentlyRunning){ // makes sure we are in training mode and we are currently running a session
             if (training.moreSessions()){
                 // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
-                serial.writeLine(input.acceleration(Dimension.X) + " ")
+                serial.writeLine(input.acceleration(Dimension.X) + "")
                 datalogger.log(datalogger.createCV(training.sessionColumns[training.sessionNum], input.acceleration(Dimension.X)))
                 training.currentSession.push(input.acceleration(Dimension.X))
             }
@@ -54,6 +54,7 @@ namespace custom {
     }
 
 //____________________________________________CUSTOM BLOCKS FOR TRAINING TO BE PUT INSIDE BUTTON A AND BUTTON B RESPECTIVELY_____________________________________
+//_______________________________________________________________________________________________________________________________________________________________
 
     
 
@@ -64,12 +65,12 @@ namespace custom {
         }
     }
 
+
     //% block = "trainingButtonB"
     export function trainingButtonB(): void {
         serial.writeLine("Button B is pressed")
         if (training.status && training.currentlyRunning) {
             training.currentlyRunning = false
-            datalogger.includeTimestamp(FlashLogTimeStampFormat.None)
             training.dataSessions.push(training.currentSession)
             training.currentSession = []
             training.sessionNum += 1
@@ -81,6 +82,7 @@ namespace custom {
     }
 
 //________________________________________________________________________________________________________________________________________________________________
+//________________________________________________________________________________________________________________________________________________________________
 
     
     
@@ -91,24 +93,34 @@ namespace custom {
         switch(numSessions){
             case 1:
                 datalogger.setColumnTitles("Session 1")
+                training.sessionColumns = ["Session 1"]
             case 2:
                 datalogger.setColumnTitles("Session 1", "Session 2")
+                training.sessionColumns = ["Session 1", "Session 2"]
             case 3:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3"]
             case 4:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4"]
             case 5:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5"]
             case 6:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6"]
             case 7:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7"]
             case 8:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8"]
             case 9:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9"]
             case 10:
                 datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9", "Session 10")
+                training.sessionColumns = ["Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9", "Session 10"]
         }
         
         training.activity = "mo"
