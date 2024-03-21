@@ -34,7 +34,7 @@ namespace custom {
 
     //% block = "foreverBlock"
     export function foreverBlock(): void {
-        if (training.status && training.currentlyRunning){
+        if (training.status && training.currentlyRunning){ // makes sure we are in training mode and we are currently running a session
             if (training.moreSessions()){
                 // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
                 serial.writeLine(input.acceleration(Dimension.X) + " ")
@@ -69,6 +69,7 @@ namespace custom {
             training.sessionNum += 1
             if (!training.moreSessions()){
                 serial.writeLine("You have completed your training with " + training.numOfTrainingSessions + " sessions")
+                console.log(training.dataSessions)
             }
         }
     }
@@ -77,6 +78,29 @@ namespace custom {
     export function turnMotor (degrees: number, numSessions: number) {
         //serial.writeLine("Turning motor by " + degrees + " degrees")
         training.numOfTrainingSessions = numSessions
+        switch(numSessions){
+            case 1:
+                datalogger.setColumnTitles("Session 1")
+            case 2:
+                datalogger.setColumnTitles("Session 1", "Session 2")
+            case 3:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3")
+            case 4:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4")
+            case 5:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5")
+            case 6:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6")
+            case 7:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7")
+            case 8:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8")
+            case 9:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9")
+            case 10:
+                datalogger.setColumnTitles("Session 1", "Session 2", "Session 3", "Session 4", "Session 5", "Session 6", "Session 7", "Session 8", "Session 9", "Session 10")
+        }
+        
         training.activity = "mo"
     }
 }
