@@ -39,8 +39,6 @@ namespace custom {
                 // PLACEHOLDER CODE BELOW, TO BE REPLACED WITH EMG CODE
                 serial.writeLine(input.acceleration(Dimension.X) + " ")
                 training.currentSession.push(input.acceleration(Dimension.X))
-            } else{
-                serial.writeLine("You have completed your training with " + training.numOfTrainingSessions + "sessions")
             }
 
         }
@@ -69,6 +67,9 @@ namespace custom {
             training.dataSessions.push(training.currentSession)
             training.currentSession = []
             training.sessionNum += 1
+            if (!training.moreSessions()){
+                serial.writeLine("You have completed your training with " + training.numOfTrainingSessions + " sessions")
+            }
         }
     }
     
