@@ -1,13 +1,13 @@
 input.onButtonPressed(Button.A, function () {
-    neupulatorAI.trainingButtonA()
+    custom.trainingButtonA()
 })
 // datalogger.includeTimestamp(FlashLogTimeStampFormat.None)
 input.onButtonPressed(Button.B, function () {
-    neupulatorAI.trainingButtonB()
+    custom.trainingButtonB()
     custom.trainingButtonB()
 })
-neupulatorAI.trainingMode()
-neupulatorAI.turnMotor(50, 2)
+custom.trainingMode()
+custom.turnMotor(50, 2)
 basic.forever(function () {
-    neupulatorAI.foreverBlock()
+    custom.foreverBlock()
 })
