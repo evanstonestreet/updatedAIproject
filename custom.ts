@@ -9,6 +9,7 @@
  * Custom blocks
  */
 //% weight=100 color=#0fbc11
+//% groups="['Setup', 'Training', 'Testing']"
 namespace custom {
 
     // training object that keeps track of all variables needed for training
